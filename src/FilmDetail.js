@@ -1,8 +1,15 @@
 import "./FilmDetail.css";
 
 export function FilmDetail({ selectedFilm }) {
-  const { id, title, poster_path, backdrop_path, overview, release_date } =
-    selectedFilm;
+  const {
+    id,
+    title,
+    poster_path,
+    backdrop_path,
+    overview,
+    release_date,
+    tagline,
+  } = selectedFilm;
   return (
     <div className="FilmDetail is-hydrated">
       <figure className="film-backdrop">
@@ -14,12 +21,14 @@ export function FilmDetail({ selectedFilm }) {
       </figure>
 
       <div className="film-meta">
+        <h2>{tagline}</h2>
         <p className="film-detail-overview">
           <img
             src={`https://image.tmdb.org/t/p/w780${poster_path}`}
             className="film-detail-poster"
             alt={`${title} poster`}
           />
+
           {overview}
         </p>
       </div>
