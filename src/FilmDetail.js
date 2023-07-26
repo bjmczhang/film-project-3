@@ -1,15 +1,34 @@
+import { useEffect, useState } from "react";
 import "./FilmDetail.css";
+import { useParams } from "react-router-dom";
 
-export function FilmDetail({ selectedFilm }) {
-  const {
-    id,
-    title,
-    poster_path,
-    backdrop_path,
-    overview,
-    release_date,
-    tagline,
-  } = selectedFilm;
+export function FilmDetail() {
+  const { filmID } = useParams();
+  const [selectedFilm, setSelectedFilm] = useState(null);
+
+  const READ_ACCESS_TOKEN = process.env.REACT_APP_TMDB_READ_ACCESS_TOKEN;
+
+  const options = {
+    method: "GET",
+    headers: {
+      accept: "application/json",
+      Authorization: `Bearer ${READ_ACCESS_TOKEN}`,
+    },
+  };
+
+  useEffect(() => {
+    fetch(`https://api.themoviedb.org/3/movie/${filmID}`, options)
+      .then((response) => response.json())
+      .then((response) => setSelectedFilm(response))
+      .catch((err) => console.error(err));
+  }, [filmID]);
+
+  if (!selectedFilm) {
+    return <FilmDetailEmpty />;
+  }
+
+  const { title, poster_path, backdrop_path, overview, tagline } = selectedFilm;
+
   return (
     <div className="FilmDetail is-hydrated">
       <figure className="film-backdrop">

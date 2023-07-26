@@ -54,3 +54,7 @@
 .FilmRow .film-summary > p {
   margin-top: 0;
 }
+
+.material-icons {
+  color: black;
+}

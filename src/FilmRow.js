@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./FilmRow.css";
 
 function FilmRow({
@@ -31,9 +32,10 @@ function FilmRow({
               {selectedList === "all" ? "add_to_queue" : "remove_from_queue"}
             </span>
           </button>
-          <button className="action" onClick={() => showDetail(film)}>
+
+          <Link to={`/films/${id}`} className="action">
             <span className="material-icons">read_more</span>
-          </button>
+          </Link>
         </div>
       </div>
     </div>
